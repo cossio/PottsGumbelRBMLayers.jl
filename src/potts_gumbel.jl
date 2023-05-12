@@ -39,3 +39,27 @@ CudaRBMs.gpu(layer::PottsGumbel) = PottsGumbel(CudaRBMs.gpu(layer.par))
 CudaRBMs.cpu(layer::PottsGumbel) = PottsGumbel(CudaRBMs.cpu(layer.par))
 
 RestrictedBoltzmannMachines.grad2ave(l::PottsGumbel, ∂::AbstractArray) = grad2ave(Potts(l), ∂)
+
+
+# From common.jl
+
+Base.size(layer::PottsGumbel) = size(layer.θ)
+Base.length(layer::PottsGumbel) = length(layer.θ)
+Base.propertynames(::PottsGumbel) = (:θ,)
+
+function Base.getproperty(layer::PottsGumbel, name::Symbol)
+    if name === :θ
+        return @view getfield(layer, :par)[1, ..]
+    else
+        return getfield(layer, name)
+    end
+end
+
+RestrictedBoltzmannMachines.energies(layer::PottsGumbel, x::AbstractArray) = energies(Potts(layer), x)
+RestrictedBoltzmannMachines.energy(layer::PottsGumbel, x::AbstractArray) = energy(Potts(layer), x)
+RestrictedBoltzmannMachines.∂cgfs(layer::PottsGumbel, inputs = 0) = ∂cgfs(Potts(layer), inputs)
+RestrictedBoltzmannMachines.∂energy_from_moments(layer::PottsGumbel, moments::AbstractArray) = ∂energy_from_moments(Potts(layer), moments)
+RestrictedBoltzmannMachines.moments_from_samples(layer::PottsGumbel, data::AbstractArray; wts = nothing) = moments_from_samples(Potts(layer), data; wts)
+RestrictedBoltzmannMachines.colors(layer::PottsGumbel) = size(layer, 1)
+RestrictedBoltzmannMachines.sitedims(layer::PottsGumbel) = ndims(layer) - 1
+RestrictedBoltzmannMachines.sitesize(layer::PottsGumbel) = size(layer)[2:end]
