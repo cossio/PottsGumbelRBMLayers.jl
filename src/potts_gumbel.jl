@@ -38,4 +38,4 @@ end
 CudaRBMs.gpu(layer::PottsGumbel) = PottsGumbel(CudaRBMs.gpu(layer.par))
 CudaRBMs.cpu(layer::PottsGumbel) = PottsGumbel(CudaRBMs.cpu(layer.par))
 
-RestrictedBoltzmannMachines.grad2ave(::PottsGumbel, ∂::AbstractArray) = ∂[1, ..]
+RestrictedBoltzmannMachines.grad2ave(l::PottsGumbel, ∂::AbstractArray) = grad2ave(Potts(l), ∂)

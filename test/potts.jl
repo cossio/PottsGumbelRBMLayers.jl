@@ -8,12 +8,12 @@ using LogExpFunctions: logistic
 using EllipsisNotation: (..)
 using QuadGK: quadgk
 using PottsGumbelRBMLayers: PottsGumbel
-using RestrictedBoltzmannMachines: RBM, Binary, Potts
-    batchmean, batchvar, batchcov, grad2ave,
+using RestrictedBoltzmannMachines: RBM, Binary, Potts,
+    grad2ave,
     mean_from_inputs, var_from_inputs, meanvar_from_inputs, batchdims, gauss_energy,
     std_from_inputs, mean_abs_from_inputs, sample_from_inputs, mode_from_inputs,
     energy, cgf, free_energy, cgfs, energies, ∂cgf, vstack, ∂energy, ∂free_energy, binary_rand,
-    total_meanvar_from_inputs, total_mean_from_inputs, total_var_from_inputs, sample_v_from_v
+    sample_v_from_v
 
 Random.seed!(2)
 
@@ -76,14 +76,9 @@ _layers = (
         if B == ()
             @test @inferred(energy(layer, x)) ≈ sum(energies(layer, x))
             @test @inferred(cgf(layer, x)) ≈ sum(cgfs(layer, x))
-            @test @inferred(batchmean(layer, x)) ≈ x
-            @test @inferred(batchvar(layer, x)) == zeros(sz)
-            @test @inferred(batchcov(layer, x)) == zeros(sz..., sz...)
         else
             @test @inferred(energy(layer, x)) ≈ reshape(sum(energies(layer, x); dims=1:ndims(layer)), B)
             @test @inferred(cgf(layer, x)) ≈ reshape(sum(cgfs(layer, x); dims=1:ndims(layer)), B)
-            @test @inferred(batchmean(layer, x)) ≈ reshape(mean(x; dims=(ndims(layer) + 1):ndims(x)), sz)
-            @test @inferred(batchvar(layer, x)) ≈ reshape(var(x; dims=(ndims(layer) + 1):ndims(x), corrected=false), sz)
         end
 
         μ = @inferred mean_from_inputs(layer, x)
