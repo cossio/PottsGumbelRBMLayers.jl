@@ -9,7 +9,7 @@ using EllipsisNotation: (..)
 using QuadGK: quadgk
 using PottsGumbelRBMLayers: PottsGumbel
 using RestrictedBoltzmannMachines: RBM, Binary, Potts
-    flatten, batch_size, batchmean, batchvar, batchcov, grad2ave,
+    batchmean, batchvar, batchcov, grad2ave,
     mean_from_inputs, var_from_inputs, meanvar_from_inputs, batchdims, gauss_energy,
     std_from_inputs, mean_abs_from_inputs, sample_from_inputs, mode_from_inputs,
     energy, cgf, free_energy, cgfs, energies, ∂cgf, vstack, ∂energy, ∂free_energy, binary_rand,
@@ -34,7 +34,6 @@ _layers = (
 
     @test (@inferred length(layer)) == prod(sz)
     @test (@inferred ndims(layer)) == length(sz)
-    @test (@inferred batch_size(layer, rand(sz...))) == ()
     @test (@inferred energy(layer, rand(sz...))) isa Number
     @test (@inferred cgf(layer)) isa Number
     @test (@inferred cgf(layer, rand(sz...))) isa Number
@@ -54,7 +53,6 @@ _layers = (
 
     for B in ((), (2,), (1,2))
         x = rand(sz..., B...)
-        @test (@inferred batch_size(layer, x)) == (B...,)
         @test (@inferred batchdims(layer, x)) == (length(sz) + 1):ndims(x)
         @test size(@inferred energy(layer, x)) == (B...,)
         @test size(@inferred cgf(layer, x)) == (B...,)
@@ -86,7 +84,6 @@ _layers = (
             @test @inferred(cgf(layer, x)) ≈ reshape(sum(cgfs(layer, x); dims=1:ndims(layer)), B)
             @test @inferred(batchmean(layer, x)) ≈ reshape(mean(x; dims=(ndims(layer) + 1):ndims(x)), sz)
             @test @inferred(batchvar(layer, x)) ≈ reshape(var(x; dims=(ndims(layer) + 1):ndims(x), corrected=false), sz)
-            @test @inferred(batchcov(layer, x)) ≈ reshape(cov(flatten(layer, x); dims=2, corrected=false), sz..., sz...)
         end
 
         μ = @inferred mean_from_inputs(layer, x)
