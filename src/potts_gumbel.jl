@@ -38,9 +38,6 @@ end
 CudaRBMs.gpu(layer::PottsGumbel) = PottsGumbel(CudaRBMs.gpu(layer.par))
 CudaRBMs.cpu(layer::PottsGumbel) = PottsGumbel(CudaRBMs.cpu(layer.par))
 
-RestrictedBoltzmannMachines.grad2ave(l::PottsGumbel, ∂::AbstractArray) = grad2ave(Potts(l), ∂)
-
-
 # From common.jl
 
 Base.size(layer::PottsGumbel) = size(layer.θ)
@@ -63,3 +60,37 @@ RestrictedBoltzmannMachines.moments_from_samples(layer::PottsGumbel, data::Abstr
 RestrictedBoltzmannMachines.colors(layer::PottsGumbel) = size(layer, 1)
 RestrictedBoltzmannMachines.sitedims(layer::PottsGumbel) = ndims(layer) - 1
 RestrictedBoltzmannMachines.sitesize(layer::PottsGumbel) = size(layer)[2:end]
+
+# other stuff
+
+RestrictedBoltzmannMachines.grad2ave(l::PottsGumbel, ∂::AbstractArray) = grad2ave(Potts(l), ∂)
+
+function RestrictedBoltzmannMachines.anneal(init::PottsGumbel, final::PottsGumbel; β::Real)
+    θ = (1 - β) * init.θ + β * final.θ
+    return PottsGumbel(; θ)
+end
+
+RestrictedBoltzmannMachines.anneal_zero(l::PottsGumbel) = PottsGumbel(; θ = zero(l.θ))
+
+function RestrictedBoltzmannMachines.substitution_matrix_sites(rbm::RBM{<:PottsGumbel}, v::AbstractArray, sites::AbstractArray{<:CartesianIndex})
+    RestrictedBoltzmannMachines.substitution_matrix_sites(RBM(Potts(rbm.visible), rbm.hidden, rbm.w), v, sites)
+end
+
+function RestrictedBoltzmannMachines.substitution_matrix_exhaustive(rbm::RBM{<:PottsGumbel}, v::AbstractArray)
+    RestrictedBoltzmannMachines.substitution_matrix_exhaustive(RBM(Potts(rbm.visible), rbm.hidden, rbm.w), v)
+end
+
+function RestrictedBoltzmannMachines.∂regularize_fields!(∂::AbstractArray, layer::PottsGumbel; l2_fields::Real = 0)
+    RestrictedBoltzmannMachines.∂regularize_fields!(∂, Potts(layer); l2_fields )
+end
+
+RestrictedBoltzmannMachines.rescale_activations!(layer::PottsGumbel, λ::AbstractArray) = false
+
+function RestrictedBoltzmannMachines.initialize!(layer::PottsGumbel, data::AbstractArray; ϵ::Real=1e-6, wts=nothing)
+    PottsGumbel(RestrictedBoltzmannMachines.initialize!(Potts(layer), data; ϵ, wts))
+end
+
+function RestrictedBoltzmannMachines.initialize!(layer::PottsGumbel)
+    layer.θ .= 0
+    return layer
+end

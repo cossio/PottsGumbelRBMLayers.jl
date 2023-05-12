@@ -1,7 +1,7 @@
 name = "PottsGumbelRBMLayers"
 uuid = "bcd408f2-95f5-489e-9934-d251842dc866"
 authors = ["JFdCD <j.cossio.diaz@gmail.com>"]
-version = "1.0.0"
+version = "1.1.0-DEV"
 
 [deps]
 CudaRBMs = "4e7460e3-fd1b-4f88-90fa-49c1b80b3e77"

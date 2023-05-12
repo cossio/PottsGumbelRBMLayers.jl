@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file. The format 
 
 ## Unreleased
 
+- zerosum, regularization, initialization
+
 ## v1.0.0
 
 - Release v1.0.0.
