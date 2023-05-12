@@ -1,0 +1,7 @@
+name = "PottsGumbelRBMLayers"
+uuid = "bcd408f2-95f5-489e-9934-d251842dc866"
+authors = ["JFdCD <j.cossio.diaz@gmail.com>"]
+version = "1.0.0-DEV"
+
+[compat]
+julia = "1.8.3"
