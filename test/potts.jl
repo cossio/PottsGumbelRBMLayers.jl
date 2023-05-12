@@ -67,7 +67,7 @@ _layers = (
         @test μ ≈ mean_from_inputs(layer, x)
         @test ν ≈ var_from_inputs(layer, x)
 
-        if layer isa Potts || PottsGumbel
+        if (layer isa Potts) || (layer isa PottsGumbel)
             @test size(@inferred cgfs(layer, x)) == (1, tail(size(x))...)
         else
             @test size(@inferred cgfs(layer, x)) == size(x)
