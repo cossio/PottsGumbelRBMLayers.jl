@@ -31,10 +31,10 @@ function RestrictedBoltzmannMachines.zerosum!(rbm::RBM{<:AbstractLayer, <:PottsG
     return RBM(_rbm.visible, PottsGumbel(_rbm.hidden), _rbm.w)
 end
 
-zerosum!(∂::∂RBM, rbm::RBM{<:PottsGumbel,<:PottsGumbel}) = zerosum!(∂, _rbm_potts(rbm))
-zerosum!(∂::∂RBM, rbm::RBM{<:AbstractLayer,<:PottsGumbel}) = zerosum!(∂, _rbm_potts(rbm))
-zerosum!(∂::∂RBM, rbm::RBM{<:PottsGumbel,<:AbstractLayer}) = zerosum!(∂, _rbm_potts(rbm))
+RestrictedBoltzmannMachines.zerosum!(∂::∂RBM, rbm::RBM{<:PottsGumbel,<:PottsGumbel}) = zerosum!(∂, _rbm_potts(rbm))
+RestrictedBoltzmannMachines.zerosum!(∂::∂RBM, rbm::RBM{<:AbstractLayer,<:PottsGumbel}) = zerosum!(∂, _rbm_potts(rbm))
+RestrictedBoltzmannMachines.zerosum!(∂::∂RBM, rbm::RBM{<:PottsGumbel,<:AbstractLayer}) = zerosum!(∂, _rbm_potts(rbm))
 
-zerosum_weights(weights::AbstractArray, rbm::RBM{<:PottsGumbel,<:PottsGumbel}) = zerosum_weights(weights, _rbm_potts(rbm))
-zerosum_weights(weights::AbstractArray, rbm::RBM{<:AbstractLayer,<:PottsGumbel}) = zerosum_weights(weights, _rbm_potts(rbm))
-zerosum_weights(weights::AbstractArray, rbm::RBM{<:PottsGumbel,<:AbstractLayer}) = zerosum_weights(weights, _rbm_potts(rbm))
+RestrictedBoltzmannMachines.zerosum_weights(weights::AbstractArray, rbm::RBM{<:PottsGumbel,<:PottsGumbel}) = zerosum_weights(weights, _rbm_potts(rbm))
+RestrictedBoltzmannMachines.zerosum_weights(weights::AbstractArray, rbm::RBM{<:AbstractLayer,<:PottsGumbel}) = zerosum_weights(weights, _rbm_potts(rbm))
+RestrictedBoltzmannMachines.zerosum_weights(weights::AbstractArray, rbm::RBM{<:PottsGumbel,<:AbstractLayer}) = zerosum_weights(weights, _rbm_potts(rbm))
