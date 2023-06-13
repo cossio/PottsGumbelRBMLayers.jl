@@ -10,13 +10,6 @@ function RestrictedBoltzmannMachines.zerosum(rbm::RBM{<:AbstractLayer,<:PottsGum
     return RBM(_rbm.visible, PottsGumbel(_rbm.hidden), _rbm.w)
 end
 
-RestrictedBoltzmannMachines.shift_fields(l::PottsGumbel, a::AbstractArray) = PottsGumbel(; θ = l.θ .+ a)
-
-function RestrictedBoltzmannMachines.shift_fields!(l::PottsGumbel, a::AbstractArray)
-    l.θ .+= a
-    return l
-end
-
 function RestrictedBoltzmannMachines.zerosum!(rbm::RBM{<:PottsGumbel, <:PottsGumbel})
     _rbm_gumbel(zerosum!(_rbm_potts(rbm)))
 end

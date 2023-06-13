@@ -15,5 +15,6 @@ include("gumbel.jl")
 include("util.jl")
 include("zerosum.jl")
 include("cuda.jl")
+include("shift_fields.jl")
 
 end
