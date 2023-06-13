@@ -14,5 +14,6 @@ include("potts_gumbel.jl")
 include("gumbel.jl")
 include("util.jl")
 include("zerosum.jl")
+include("cuda.jl")
 
 end

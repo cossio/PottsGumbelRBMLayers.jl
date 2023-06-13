@@ -35,9 +35,6 @@ function RestrictedBoltzmannMachines.sample_from_inputs(layer::PottsGumbel, inpu
     return onehot_encode(c, 1:size(layer, 1))
 end
 
-CudaRBMs.gpu(layer::PottsGumbel) = PottsGumbel(CudaRBMs.gpu(layer.par))
-CudaRBMs.cpu(layer::PottsGumbel) = PottsGumbel(CudaRBMs.cpu(layer.par))
-
 # From common.jl
 
 Base.size(layer::PottsGumbel) = size(layer.θ)
