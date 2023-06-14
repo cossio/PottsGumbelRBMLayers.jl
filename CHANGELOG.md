@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file. The format 
 
 ## Unreleased
 
+## v1.2.0
+
 - `potts_to_gumbel`, `gumbel_to_potts` conversion functions.
 
 ## v1.1.0
