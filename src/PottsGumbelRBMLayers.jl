@@ -8,6 +8,7 @@ using RestrictedBoltzmannMachines: RBM, AbstractLayer, Potts,
 using EllipsisNotation: (..)
 
 import RestrictedBoltzmannMachines
+import RestrictedBoltzmannMachinesHDF5
 import CudaRBMs
 
 include("potts_gumbel.jl")
@@ -16,5 +17,6 @@ include("util.jl")
 include("zerosum.jl")
 include("cuda.jl")
 include("shift_fields.jl")
+include("io.jl")
 
 end
