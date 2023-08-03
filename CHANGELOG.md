@@ -4,22 +4,22 @@ All notable changes to this project will be documented in this file. The format 
 
 ## Unreleased
 
-## v1.3.1
+## 1.3.1 - 2023-08-03
 
 - No changes.
 
-## v1.3.0
+## 1.3.0
 
 - Support `RestrictedBoltzmannMachinesHDF5`.
 
-## v1.2.0
+## 1.2.0
 
 - `potts_to_gumbel`, `gumbel_to_potts` conversion functions.
 
-## v1.1.0
+## 1.1.0
 
 - zerosum, regularization, initialization
 
-## v1.0.0
+## 1.0.0
 
 - Release v1.0.0.
