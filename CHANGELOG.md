@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. The format 
 
 ## Unreleased
 
+## v1.3.1
+
+- No changes.
+
 ## v1.3.0
 
 - Support `RestrictedBoltzmannMachinesHDF5`.
