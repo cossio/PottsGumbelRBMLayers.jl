@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file. The format 
 
 ## Unreleased
 
-## 1.3.1 - 2023-08-03
+## 1.3.1
 
 - No changes.
 
