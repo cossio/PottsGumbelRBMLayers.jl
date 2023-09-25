@@ -1,5 +1,8 @@
 module PottsGumbelRBMLayers
 
+import RestrictedBoltzmannMachines
+import RestrictedBoltzmannMachinesHDF5
+import CudaRBMs
 using Random: randexp
 using RestrictedBoltzmannMachines: RBM, AbstractLayer, Potts,
     cgfs, mean_from_inputs, std_from_inputs, var_from_inputs, mode_from_inputs, meanvar_from_inputs,
@@ -7,9 +10,6 @@ using RestrictedBoltzmannMachines: RBM, AbstractLayer, Potts,
     zerosum, zerosum!, zerosum_weights, ∂RBM
 using EllipsisNotation: (..)
 
-import RestrictedBoltzmannMachines
-import RestrictedBoltzmannMachinesHDF5
-import CudaRBMs
 
 include("potts_gumbel.jl")
 include("gumbel.jl")
