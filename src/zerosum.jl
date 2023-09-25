@@ -1,4 +1,6 @@
-RestrictedBoltzmannMachines.zerosum(rbm::RBM{<:PottsGumbel,<:PottsGumbel}) = potts_to_gumbel(zerosum(potts_to_gumbel(rbm)))
+function RestrictedBoltzmannMachines.zerosum(rbm::RBM{<:PottsGumbel,<:PottsGumbel})
+    return potts_to_gumbel(zerosum(potts_to_gumbel(rbm)))
+end
 
 function RestrictedBoltzmannMachines.zerosum(rbm::RBM{<:PottsGumbel,<:AbstractLayer})
     _rbm = zerosum(potts_to_gumbel(rbm))
