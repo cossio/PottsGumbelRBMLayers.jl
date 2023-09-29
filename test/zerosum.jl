@@ -17,4 +17,6 @@ using Statistics: mean
     F2 = free_energy(rbm, v)
     @test all(F0 - F2 .≈ mean(F0 - F2))
     @test F1 ≈ F2
+    @test maximum(abs, mean(rbm.w; dims=1)) < 1e-12
+    @test maximum(abs, mean(rbm.visible.θ; dims=1)) < 1e-12
 end

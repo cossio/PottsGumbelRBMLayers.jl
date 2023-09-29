@@ -12,16 +12,16 @@ function RestrictedBoltzmannMachines.zerosum(rbm::RBM{<:AbstractLayer,<:PottsGum
     return RBM(_rbm.visible, PottsGumbel(_rbm.hidden), _rbm.w)
 end
 
-function RestrictedBoltzmannMachines.zerosum!(rbm::RBM{<:PottsGumbel, <:PottsGumbel})
+function RestrictedBoltzmannMachines.zerosum!(rbm::RBM{<:PottsGumbel,<:PottsGumbel})
     return potts_to_gumbel(zerosum!(gumbel_to_potts(rbm)))
 end
 
-function RestrictedBoltzmannMachines.zerosum!(rbm::RBM{<:PottsGumbel, <:AbstractLayer})
+function RestrictedBoltzmannMachines.zerosum!(rbm::RBM{<:PottsGumbel,<:AbstractLayer})
     _rbm = zerosum!(gumbel_to_potts(rbm))
     return RBM(PottsGumbel(_rbm.visible), _rbm.hidden, _rbm.w)
 end
 
-function RestrictedBoltzmannMachines.zerosum!(rbm::RBM{<:AbstractLayer, <:PottsGumbel})
+function RestrictedBoltzmannMachines.zerosum!(rbm::RBM{<:AbstractLayer,<:PottsGumbel})
     _rbm = zerosum!(gumbel_to_potts(rbm))
     return RBM(_rbm.visible, PottsGumbel(_rbm.hidden), _rbm.w)
 end
