@@ -12,4 +12,12 @@ Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 Zygote = "e88e6eb3-aa80-5325-afca-941959d7151f"
 
 [compat]
-Aqua = "0.7"
+Aqua = "0.7, 0.8"
+EllipsisNotation = "1.11.0"
+LogExpFunctions = "1.0.1"
+QuadGK = "2.11.3"
+RestrictedBoltzmannMachines = "7.1.0"
+RestrictedBoltzmannMachinesHDF5 = "2.2.3"
+StandardizedRestrictedBoltzmannMachines = "4.3.0"
+Statistics = "1.11.1"
+Zygote = "0.7.12"
