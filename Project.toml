@@ -20,6 +20,7 @@ PottsGumbelStandardizedRBMsExt = "StandardizedRestrictedBoltzmannMachines"
 [compat]
 CudaRBMs = "1"
 EllipsisNotation = "1"
+Random = "1"
 RestrictedBoltzmannMachines = "3"
 RestrictedBoltzmannMachinesHDF5 = "2"
 StandardizedRestrictedBoltzmannMachines = "4.1.1"
